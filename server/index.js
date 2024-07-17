@@ -5,7 +5,7 @@ const productRoute = require('./routes/product.route.js');
 const cors = require('cors');
 
 const app = express();
-
+//hi
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
