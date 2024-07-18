@@ -1,31 +1,23 @@
-// src/components/ProductList.js
-import React, { useState, useEffect } from 'react';
+// import axios from "axios";
+import React from 'react';
+import useProducts from './useProduct';
 
-const URL = 'http://localhost:3001/api/products';
-
-const ProductList = () => {
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const result = await fetch(URL);
-            const data = await result.json();
-            setProducts(data);
-            console.log(data);
-        }
-        fetchData();
-    }, []);
-
-    return (
-        <div>
-            <h1>Product List</h1>
-            <ul>
-                {products.map(product => (
-                    <li key={product._id}>{product.name}</li>
-                ))}
-            </ul>
-        </div>
-    )
-};
+function ProductList() {
+  const products = useProducts();
+  return (
+    <div>
+      {products.map(product => (
+        <div key={product.id}>{product.name}</div>
+      ))}
+    </div>
+  );
+}
 
 export default ProductList;
+    // axios.get(URL).then(
+    //     response => {
+    //         console.log(response.data);
+    //     }
+    // ).catch (err => {
+    //     console.log(err);
+    // })
