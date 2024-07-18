@@ -9,20 +9,11 @@ const app = express();
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+app.use(cors());
 
 //routes
 app.use('/api/products', productRoute);
-app.use(cors());
 
-const enableCors = (req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, X-Requested-With');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
-};
-
-app.use(enableCors);
 
 app.get('/', (req, res) => {
     res.send('Hello from Node API Server Updated');
