@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MakeTask from './MakeTask';
+import './styles/TaskList.css';
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -45,32 +46,36 @@ const TaskList = () => {
   return (
     <div>
       <h1>To Do</h1>
-      {tasks.map((task) => (
-        <div key={task._id}>
-          {editingTaskId === task._id ? (
-            <input
-              type="text"
-              value={editingTaskValue}
-              onChange={handleInputChange}
-            />
-          ) : (
-            <h1>{task.task}</h1>
-          )}
-          {editingTaskId === task._id ? (
-            <button type="button" onClick={() => handleSave(task._id)}>Save</button>
-          ) : (
-            <button type="button" onClick={() => handleEdit(task)}>Edit</button>
-          )}
-          <button type="button" onClick={() => handleDelete(task._id)}>Complete</button>
-        </div>
-      ))}
-      <MakeTask onCreate={handleCreate} />
-      <h1>Completed</h1>
-      {completedTasks.map((task) => (
-        <div key={task._id}>
-          <h1>{task.task}</h1>
-        </div>
-      ))}
+      <ul>
+        {tasks.map((task) => (
+          <div key={task._id} className="list-item">
+            {editingTaskId === task._id ? (
+              <input
+                type="text"
+                value={editingTaskValue}
+                onChange={handleInputChange}
+              />
+            ) : (
+              <li>{task.task}</li>
+            )}
+            <div className ="buttons">
+              {editingTaskId === task._id ? (
+                <button type="button" onClick={() => handleSave(task._id)}>Save</button>
+              ) : (
+                <button type="button" onClick={() => handleEdit(task)}>Edit</button>
+              )}
+              <button type="button" onClick={() => handleDelete(task._id)}>Complete</button>
+            </div>
+          </div>
+        ))}
+        <MakeTask onCreate={handleCreate} />
+        <h1>Completed</h1>
+        {completedTasks.map((task) => (
+          <div key={task._id}>
+            <li>{task.task}</li>
+          </div>
+        ))}
+      </ul>
     </div>
   );
 };
