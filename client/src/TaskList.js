@@ -12,7 +12,7 @@ const TaskList = () => {
   useEffect(() => {
     const getTasks = async () => {
       const response = await axios.get('http://localhost:3001/api/tasks');
-      setTasks(response.data);
+      setTasks(response.data.reverse());
     };
     getTasks();
   }, []);
@@ -20,7 +20,7 @@ const TaskList = () => {
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost:3001/api/tasks/${id}`);
     setTasks(tasks.filter(task => task._id !== id));
-    setCompletedTasks([...completedTasks, tasks.find(task => task._id === id)]);
+    setCompletedTasks([tasks.find(task => task._id === id), ...completedTasks]);
   };
 
   const handleEdit = (task) => {
@@ -40,13 +40,14 @@ const TaskList = () => {
 
   const handleCreate = async (newTask) => {
     const response = await axios.post('http://localhost:3001/api/tasks', newTask);
-    setTasks([...tasks, response.data]);
+    setTasks([response.data, ...tasks]);
   };
 
   return (
-    <div>
+    <div className="notes">
       <h1>To Do</h1>
       <ul>
+      <MakeTask onCreate={handleCreate} />      
         {tasks.map((task) => (
           <div key={task._id} className="list-item">
             {editingTaskId === task._id ? (
@@ -68,13 +69,12 @@ const TaskList = () => {
             </div>
           </div>
         ))}
-        <MakeTask onCreate={handleCreate} />
-        <h1>Completed</h1>
-        {completedTasks.map((task) => (
-          <div key={task._id}>
-            <li>{task.task}</li>
-          </div>
-        ))}
+          <h1>Completed</h1>
+          {completedTasks.map((task) => (
+            <div key={task._id} className="list-item">
+              <li>{task.task}</li>
+            </div>
+          ))}
       </ul>
     </div>
   );

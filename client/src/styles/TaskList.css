@@ -14,11 +14,13 @@ button {
 .list-item {
     display: flex;
     flex-direction: row;
-    width: 50%;
     justify-content: space-between;
+    text-align: center;
+    border-bottom: 2px solid #000; /* Add a border to encapsulate the content */
 } 
 
 li {
+    text-align: center;
     font-size: 24px;
     list-style-type: none;
     display: flex;
@@ -36,4 +38,19 @@ input {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+.notes {
+    background-color: #FAF9F6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px; /* Add padding to ensure content doesn't touch the border */
+    border: 2px solid #000; /* Add a border to encapsulate the content */
+    width: 50vw;
+    box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+    margin: auto; /* Center the container horizontally */
+    padding-bottom: 40px;
 }
