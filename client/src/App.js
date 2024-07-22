@@ -1,12 +1,12 @@
-// import React, { useState, useEffect } from 'react';
-import './App.css';
-import ProductList from './ProductList';
+import TaskList from './TaskList';
+import Navbar from './Navbar';
 
 function App() {
 
   return (
     <div>
-      <ProductList />
+      <Navbar />
+      <TaskList />
     </div>
   )
 }
